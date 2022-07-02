@@ -1,0 +1,22 @@
+{
+  "name": "mrkv",
+  "packageManager": "yarn@3.2.1",
+  "description": "Node markov library",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/splatterxl/mrkv.git"
+  },
+  "author": "Splatterxl <splatterxl@outlook.ie>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/splatterxl/mrkv/issues"
+  },
+  "homepage": "https://github.com/splatterxl/mrkv#readme",
+  "devDependencies": {
+    "@types/node": "^18.0.0"
+  }
+}
