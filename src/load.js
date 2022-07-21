@@ -7,9 +7,9 @@ export const SYMBOL_START = Symbol("kStart");
  *
  * @param {Array<string>} sentences
  */
-export default function loadArray(sentences) {
+export default async function loadArray(sentences) {
   /**
-   * @type {Map<string | symbol, Record<string | symbol, number>>}
+   * @type {Map<string | symbol, Array<string>>}
    */
   const map = new Map();
 
@@ -19,40 +19,38 @@ export default function loadArray(sentences) {
     const already = map.get(word);
 
     if (!already) {
-      return map.set(word, { [next]: 1 });
+      return map.set(word, [next]);
     } else {
-      let freq = already[next];
+      already.push(next);
 
-      if (!freq) freq = 1;
-      else freq += 1;
-
-      already[next] = freq;
       map.set(word, already);
     }
   }
 
-  for (const sentence of sentences) {
-    const words = sentence.split(/ +/g).filter((v) => v.length);
+  await Promise.all(
+    sentences.map(async (sentence) => {
+      const words = sentence.split(/ +/g).filter((v) => v.length);
 
-    if (!words.length) continue;
+      if (!words.length) return;
 
-    for (let i = 0; i < words.length; i++) {
-      const word = words[i];
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i];
 
-      if (i === 0 && word.length) {
-        addWord(SYMBOL_START, word);
+        if (i === 0 && word.length) {
+          addWord(SYMBOL_START, word);
+        }
+
+        if (i + 1 === words.length) {
+          addWord(word, undefined);
+          continue;
+        }
+
+        const next = words[i + 1];
+
+        addWord(word, next);
       }
-
-      if (i + 1 === words.length) {
-        addWord(word, undefined);
-        continue;
-      }
-
-      const next = words[i + 1];
-
-      addWord(word, next);
-    }
-  }
+    })
+  );
 
   return map;
 }

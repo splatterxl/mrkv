@@ -5,7 +5,6 @@
   "version": "0.1.0",
   "main": "src/index.js",
   "type": "module",
-  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/splatterxl/mrkv.git"
