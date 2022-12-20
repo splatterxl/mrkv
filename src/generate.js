@@ -16,7 +16,7 @@ export default function generate(map, options = {}) {
    */
   let currentWord = options.start ?? SYMBOL_START;
   let currentData;
-  updateCurrentData();
+  if (currentWord === SYMBOL_START) updateCurrentData();
 
   const sentence = [];
 
