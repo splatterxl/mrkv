@@ -14,15 +14,18 @@ export default function generate(map, options = {}) {
   /**
    * @type {symbol | string | undefined}
    */
-  let currentWord = SYMBOL_START;
+  let currentWord = options.start ?? SYMBOL_START;
   let currentData;
   updateCurrentData();
 
   const sentence = [];
 
   function updateCurrentData() {
-    currentData = getKeyArray(map, currentWord);
+    /** @type {(string | symbol)[]} */
+    // @ts-ignore
+    currentData = map.get(currentWord) ?? [];
 
+    // @ts-ignore
     if (shouldStopASAP && currentData.includes(SYMBOL_END)) currentData = null;
     else
       currentWord = currentData[Math.floor(Math.random() * currentData.length)];
@@ -107,4 +110,5 @@ function getKeyArray(map, key) {
 
 /**
  * @typedef {object} GenerateOptions
+ * @property {string} [start]
  */
