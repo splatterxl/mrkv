@@ -1,2 +1,5 @@
-export {default as loadArray} from "./load.js";
-export {generateFrom as default, default as generateFromMap} from "./generate.js";
+export {
+  default as generateFromMap,
+  generateFrom as default,
+} from "./generate.js";
+export { default as loadArray } from "./load.js";
