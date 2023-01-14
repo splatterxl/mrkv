@@ -1,13 +1,16 @@
-const mrkv = await import("./src/file.js");
-const gen = await import("./src/generate.js");
+const mrkv = await import("./build/cjs.js");
 let file = "./test.txt";
 
-const loaded = await mrkv.loadFile(file);
+const loaded = await mrkv.loadArray([]);
 
 let i = 0;
 
 while (i < 50) {
-  console.log(await gen.default(loaded, {}));
+  console.log(
+    await mrkv.generateFromMap(loaded, {
+      start: "test i",
+    })
+  );
 
   i++;
 }

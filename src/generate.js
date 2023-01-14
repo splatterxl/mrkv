@@ -5,20 +5,25 @@ const MAX_LENGTH = 40;
 /**
  * Generate a sentence based on the markov chain data provided.
  *
- * @param {Map<string | symbol, string[]>} map Chain data.
- * @param {GenerateOptions} [options] Options to influence how data is generated.
+ * @param [options] Options to influence how data is generated.
  */
 export default function generate(map, options = {}) {
   let shouldStopASAP = false;
 
+  if (options.start != undefined && typeof options.start !== "string") {
+    throw new TypeError("Invalid input to generation options");
+  }
+
+  let startArray = options.start?.split(" ");
+
   /**
    * @type {symbol | string | undefined}
    */
-  let currentWord = options.start ?? SYMBOL_START;
+  let currentWord = startArray[startArray.length - 1] ?? SYMBOL_START;
   let currentData;
   if (currentWord === SYMBOL_START) updateCurrentData();
 
-  const sentence = [];
+  const sentence = startArray.slice(0, -1) ?? [];
 
   function updateCurrentData() {
     /** @type {(string | symbol)[]} */
@@ -53,8 +58,7 @@ export default function generate(map, options = {}) {
  * Generate a sentence from a list of sentences, which will be consumed to generate a
  * markov chain.
  *
- * @param {Array<string>} array Chain data.
- * @param {GenerateOptions} [options] Options to influence how data is generated.
+ * @param [options] Options to influence how data is generated.
  */
 export async function generateFrom(array, options = {}) {
   return generate(await loadArray(array), options);
@@ -103,12 +107,3 @@ export async function generateFrom(array, options = {}) {
 
 //   return arr;
 // }
-
-function getKeyArray(map, key) {
-  return map.get(key);
-}
-
-/**
- * @typedef {object} GenerateOptions
- * @property {string} [start]
- */
