@@ -3,7 +3,8 @@
   "packageManager": "yarn@3.2.1",
   "description": "Node markov library",
   "version": "0.1.0",
-  "main": "src/index.js",
+  "main": "./build/cjs.js",
+  "types": "./types.d.ts",
   "type": "module",
   "repository": {
     "type": "git",
@@ -16,6 +17,22 @@
   },
   "homepage": "https://github.com/splatterxl/mrkv#readme",
   "devDependencies": {
-    "@types/node": "^18.0.0"
-  }
+    "@size-limit/preset-small-lib": "^8.1.1",
+    "@swc/core": "^1.3.26",
+    "@types/node": "^18.0.0",
+    "rollup": "^3.10.0",
+    "rollup-plugin-swc3": "^0.8.0",
+    "size-limit": "^8.1.1"
+  },
+  "scripts": {
+    "bundle": "rollup --config rollup.cjs.mjs",
+    "bundle:web": "rollup --config rollup.web.mjs",
+    "size-limit": "rollup --config rollup.cjs.mjs && sed 's/require(\"node:fs\")/{readFileSync(n,e){return\"\"}}/' build/cjs.js | sed 's/require(\"node:os\")/{EOL:\"\\\\n\"}/' > build/cjs.js && size-limit"
+  },
+  "size-limit": [
+    {
+      "path": "build/cjs.js",
+      "limit": "10 kB"
+    }
+  ]
 }

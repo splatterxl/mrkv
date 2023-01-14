@@ -1,12 +1,6 @@
 export const SYMBOL_END = Symbol("kEnd");
 export const SYMBOL_START = Symbol("kStart");
 
-/**
- * Take an array of sentences and return a Map<string, Record<string | symbol, number>>
- * * representing word order of the sentences.
- *
- * @param {Array<string>} sentences
- */
 export default async function loadArray(sentences) {
   /**
    * @type {Map<string | symbol, Array<string>>}
