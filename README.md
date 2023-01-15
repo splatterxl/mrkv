@@ -157,8 +157,8 @@ console.log(await generateFile("data.txt"));
 
 | Benchmark                            | mrkv      | kurwov   | markov-typescript | markov-generator | markov-strings                     | markov-chains |
 | ------------------------------------ | --------- | -------- | ----------------- | ---------------- | ---------------------------------- | ------------- |
-| Generating a set from 10k sentences  | 13.459ms  | 50.53ms  | 419.66ms          | 346.16ms         | 1834.32ms                          | Errored       |
-| Generating a set with 100k sentences | 169.108ms | 572.49ms | 6221.28ms         | 28329.17ms       | Couldn't finish in over 10 minutes | Errored       |
+| Generating a set from 10k sentences  | 30.051ms  | 50.53ms  | 419.66ms          | 346.16ms         | 1834.32ms                          | Errored       |
+| Generating a set with 100k sentences | 403.806ms | 572.49ms | 6221.28ms         | 28329.17ms       | Couldn't finish in over 10 minutes | Errored       |
 
 ## Buy me a coffee
 
