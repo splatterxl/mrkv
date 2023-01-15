@@ -1,5 +1,5 @@
-import fs from "node:fs";
-import os from "node:os";
+import fs from "fs";
+import os from "os";
 import generate from "./generate.js";
 import loadArray from "./load.js";
 

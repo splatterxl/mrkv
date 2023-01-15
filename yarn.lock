@@ -1235,6 +1235,7 @@ __metadata:
     "@swc/core": ^1.3.26
     "@types/node": ^18.0.0
     rollup: ^3.10.0
+    rollup-plugin-deno: ^1.0.1
     rollup-plugin-swc3: ^0.8.0
     size-limit: ^8.1.1
   languageName: unknown
@@ -1441,6 +1442,13 @@ __metadata:
   bin:
     rimraf: bin.js
   checksum: 87f4164e396f0171b0a3386cc1877a817f572148ee13a7e113b238e48e8a9f2f31d009a92ec38a591ff1567d9662c6b67fd8818a2dbbaed74bc26a87a2a4a9a0
+  languageName: node
+  linkType: hard
+
+"rollup-plugin-deno@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "rollup-plugin-deno@npm:1.0.1"
+  checksum: fbe90c26e28d0dc4371642752b9220923788c5e545f61ac9ded0f1fe228938397404bce64abcc66032835b1e874aacacba648fbb6206aa46a57740f52cb975ce
   languageName: node
   linkType: hard
 

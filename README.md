@@ -1,6 +1,6 @@
 # mrkv
 
-A simple, fast and lightweight (zero dependencies) Markov chain library for use in browser and backend JavaScript environments. It provides simple utilities to read from files for Node.js environments too.
+A simple, fast and lightweight (zero dependencies) Markov chain library for use in browser and backend JavaScript environments. It uses the latest conventions and the Promises API to speed up computing, and provides simple utilities to read from files for Node.js environments too.
 
 Useful for creating silly texts from a pattern of sentences, e.g. exported from a chat platform!
 
@@ -71,7 +71,7 @@ const map = await loadFile("data.txt");
 console.log(generateFromMap(map));
 ```
 
-### `generateFromMap(corpus: Corpus): string`
+### `generateFromMap(corpus: Corpus, options?): string`
 
 Generate a string value from the data structure. This function has seen many underlying logic iterations and is now optimised for speed _and_ RAM usage. Make sure to call this every time you want a value from the map instead of generating a new map every time!
 
@@ -87,9 +87,14 @@ console.log(generateFromMap(map));
 
 // the result could be different, e.g. "apples are objectively better" or
 // "chocolate bars are my favourite fruit", etc.
+
+// the options control the sentence's start
+generateFromMap(map, {
+  start: "i like",
+});
 ```
 
-### `generateFromArray(array: Array<string>): Promise<string>`
+### `generateFromArray(array: Array<string>, options?): Promise<string>`
 
 Generates a string value from the array of sentences, calling [`loadArray`](#loadarraysentences-string-promisecorpus) and then [`generateFromMap`](#generatefrommapcorpus-corpus-string). If you need to generate a string more than once from a specific sentence array, **do not use this method**. Instead, follow the example explained in both of the linked functions.
 
@@ -104,7 +109,7 @@ console.log(
 );
 ```
 
-### `generateFile(name: string): Promise<string>`
+### `generateFile(name: string, options?): Promise<string>`
 
 **Node.js only**
 
@@ -133,3 +138,7 @@ console.log(await generateFile("data.txt"));
 | Typings              | ✔️   | ✔️                                         | ❌                | ❌               | ✔️             | ❌            |
 | Generating sentences | ✔️   | ✔️                                         | ✔️                | ✔️               | ✔️             | ✔️            |
 | Completing sentences | ✔️   | ✔️                                         | ❌                | ❌               | ❌             | ❌            |
+
+## Buy me a coffee
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K6AOLXV)
