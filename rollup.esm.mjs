@@ -4,11 +4,11 @@ import swc from "rollup-plugin-swc3";
  * @type {import("rollup").RollupOptions}
  */
 const config = {
-  input: "src/node.js",
+  input: "src/index.js",
   output: {
     name: "mrkv",
-    file: "node.js",
-    format: "cjs",
+    file: "index.js",
+    format: "esm",
     compact: false,
   },
   plugins: [

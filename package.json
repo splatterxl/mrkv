@@ -2,8 +2,8 @@
   "name": "mrkv",
   "packageManager": "yarn@3.2.1",
   "description": "Node markov library",
-  "version": "0.1.0",
-  "main": "./build/cjs.js",
+  "version": "0.2.0",
+  "main": "./index.js",
   "types": "./types.d.ts",
   "type": "module",
   "repository": {
@@ -26,9 +26,8 @@
     "size-limit": "^8.1.1"
   },
   "scripts": {
-    "bundle": "rollup --config rollup.cjs.mjs",
     "bundle:web": "rollup --config rollup.web.mjs",
-    "size-limit": "rollup --config rollup.cjs.mjs && sed 's/require(\"node:fs\")/{readFileSync(n,e){return\"\"}}/' build/cjs.js | sed 's/require(\"node:os\")/{EOL:\"\\\\n\"}/' > build/cjs.js && size-limit"
+    "bundle:deno": "rollup --config rollup.deno.mjs"
   },
   "size-limit": [
     {
