@@ -59,7 +59,7 @@ const map = await loadArray([
 console.log(generateFromMap(map));
 ```
 
-[More information about `generateFromMap`](#generatefrommapcorpus-corpus-string)
+[More information about `generateFromMap`](#generatefrommapcorpus-corpus-options-string)
 
 ### `loadFile(name: string): Promise<Corpus>`
 
@@ -105,7 +105,7 @@ generateFromMap(map, {
 
 ### `generateFromArray(array: Array<string>, options?): Promise<string>`
 
-Generates a string value from the array of sentences, calling [`loadArray`](#loadarraysentences-string-promisecorpus) and then [`generateFromMap`](#generatefrommapcorpus-corpus-string). If you need to generate a string more than once from a specific sentence array, **do not use this method**. Instead, follow the example explained in both of the linked functions.
+Generates a string value from the array of sentences, calling [`loadArray`](#loadarraysentences-string-promisecorpus) and then [`generateFromMap`](#generatefrommapcorpus-corpus-options-string). If you need to generate a string more than once from a specific sentence array, **do not use this method**. Instead, follow the example explained in both of the linked functions.
 
 ```js
 console.log(
@@ -122,7 +122,7 @@ console.log(
 
 **Node.js only**
 
-This method should only be used in exceptional circumstances or in scripting. This is a once-off function, if you need to reuse the file **do not do it this way**. Refer to [`generateFromMap`](#generatefrommapcorpus-corpus-string).
+This method should only be used in exceptional circumstances or in scripting. This is a once-off function, if you need to reuse the file **do not do it this way**. Refer to [`generateFromMap`](#generatefrommapcorpus-corpus-options-string).
 
 Calls [`loadFile`](#loadfilename-string-promisecorpus) and then `generateFromMap` to simplify one-time operations.
 
