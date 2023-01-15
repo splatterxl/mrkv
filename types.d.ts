@@ -19,7 +19,7 @@ declare module "mrkv" {
   /**
    * Data loaded from a sentence array based on the probability of meeting the next string.
    */
-  declare type Corpus = Map<string | symbol, (string | symbol)[]>;
+  export type Corpus = Map<string | symbol, (string | symbol)[]>;
 
   /**
    * Generate a similar sentence from a list of sentences, which will be consumed to generate a
