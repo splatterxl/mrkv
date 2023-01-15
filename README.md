@@ -34,6 +34,15 @@ Useful for creating silly texts from a pattern of sentences, e.g. exported from 
   // -> i like hamburgers or i like cats
   ```
 
+## Installation
+
+From npm:
+
+```sh
+npm install mrkv
+yarn add mrkv
+```
+
 ## Documentation
 
 ### `loadArray(sentences: string): Promise<Corpus>`

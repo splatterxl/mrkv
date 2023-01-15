@@ -7,7 +7,7 @@ const config = {
   input: "src/index.js",
   output: {
     name: "mrkv",
-    file: "build/web.js",
+    file: "web.js",
     format: "iife",
     compact: true,
   },

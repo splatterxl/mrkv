@@ -109,4 +109,8 @@ dist
 .tern-port
 
 build/
-!build/package.json
+
+mod.ts
+node.js
+web.js
+index.js
