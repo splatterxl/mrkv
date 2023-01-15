@@ -1,7 +1,7 @@
 {
   "name": "mrkv",
   "packageManager": "yarn@3.2.1",
-  "description": "Node markov library",
+  "description": "Small, fast and lightweight markov chain generator.",
   "version": "1.0.0",
   "main": "./index.js",
   "types": "./types.d.ts",
@@ -19,7 +19,11 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.1.1",
     "@swc/core": "^1.3.26",
+    "@types/microtime": "^2.1.0",
     "@types/node": "^18.0.0",
+    "@types/benchmark": "^2.1.2",
+    "benchmark": "^2.1.4",
+    "microtime": "^3.1.1",
     "rollup": "^3.10.0",
     "rollup-plugin-deno": "^1.0.1",
     "rollup-plugin-swc3": "^0.8.0",
@@ -34,5 +38,6 @@
       "path": "build/cjs.js",
       "limit": "10 kB"
     }
-  ]
+  ],
+  "dependencies": {}
 }

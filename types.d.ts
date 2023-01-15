@@ -1,6 +1,19 @@
 declare module "mrkv" {
   declare interface GenerateOptions {
+    /**
+     * Sentence to start off generating from. Only the last word is counted, but the rest of the input
+     * is still prepended to the output.
+     */
     start?: string;
+    /**
+     * Maximum length for the output string. Defaults to 40 characters.
+     *
+     * The output _may_ exceed this maximum length in rare cases but the library will stop
+     * generation after the string reaches the length defined in this option.
+     *
+     * @default 40
+     */
+    length?: number;
   }
 
   /**
