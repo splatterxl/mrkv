@@ -10,7 +10,10 @@ const MAX_LENGTH = 40;
 export default function generate(map, options = {}) {
   let shouldStopASAP = false;
 
-  if (options.start != undefined && typeof options.start !== "string") {
+  if (
+    (options.start != undefined && typeof options.start !== "string") ||
+    (options.limit != undefined && typeof options.limit !== "number")
+  ) {
     throw new TypeError("Invalid input to generation options");
   }
 
@@ -43,7 +46,7 @@ export default function generate(map, options = {}) {
   while (currentWord) {
     sentence.push(currentWord);
 
-    if (sentence.length >= MAX_LENGTH) {
+    if (sentence.length >= (options.length ?? MAX_LENGTH)) {
       shouldStopASAP = true;
       break;
     }

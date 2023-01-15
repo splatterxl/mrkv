@@ -4,6 +4,10 @@ A simple, fast and lightweight (zero dependencies) Markov chain library for use 
 
 Useful for creating silly texts from a pattern of sentences, e.g. exported from a chat platform!
 
+## Caveats
+
+At datasets over 1 million sentences, large memory issues have been observed. The particular mechanism the library uses to predict words is based on lengthy arrays of words mapped to other words. There is not much optimisation for memory usage, however the library is [the fastest](#benchmarks) according to benchmarks. If you're not worried about memory usage, this library is fine.
+
 ## Usage
 
 - Loading an array
@@ -97,9 +101,10 @@ console.log(generateFromMap(map));
 // the result could be different, e.g. "apples are objectively better" or
 // "chocolate bars are my favourite fruit", etc.
 
-// the options control the sentence's start
+// the options control the sentence's start and maximum length
 generateFromMap(map, {
   start: "i like",
+  limit: 50,
 });
 ```
 
@@ -147,6 +152,13 @@ console.log(await generateFile("data.txt"));
 | Typings              | ✔️   | ✔️                                         | ❌                | ❌               | ✔️             | ❌            |
 | Generating sentences | ✔️   | ✔️                                         | ✔️                | ✔️               | ✔️             | ✔️            |
 | Completing sentences | ✔️   | ✔️                                         | ❌                | ❌               | ❌             | ❌            |
+
+## Benchmarks
+
+| Benchmark                            | mrkv      | kurwov   | markov-typescript | markov-generator | markov-strings                     | markov-chains |
+| ------------------------------------ | --------- | -------- | ----------------- | ---------------- | ---------------------------------- | ------------- |
+| Generating a set from 10k sentences  | 13.459ms  | 50.53ms  | 419.66ms          | 346.16ms         | 1834.32ms                          | Errored       |
+| Generating a set with 100k sentences | 169.108ms | 572.49ms | 6221.28ms         | 28329.17ms       | Couldn't finish in over 10 minutes | Errored       |
 
 ## Buy me a coffee
 

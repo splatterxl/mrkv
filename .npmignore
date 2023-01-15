@@ -6,3 +6,5 @@ src/
 .gitignore
 rollup.*.mjs
 yarn.lock
+
+test/
