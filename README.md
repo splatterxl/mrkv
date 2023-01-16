@@ -155,6 +155,8 @@ console.log(await generateFile("data.txt"));
 
 ## Benchmarks
 
+Benchmarks ran on Apple M2 chip, 16GB RAM.
+
 | Benchmark                            | mrkv      | kurwov   | markov-typescript | markov-generator | markov-strings                     | markov-chains |
 | ------------------------------------ | --------- | -------- | ----------------- | ---------------- | ---------------------------------- | ------------- |
 | Generating a set from 10k sentences  | 30.051ms  | 50.53ms  | 419.66ms          | 346.16ms         | 1834.32ms                          | Errored       |
