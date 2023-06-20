@@ -5,6 +5,7 @@ const MAX_LENGTH = 40;
 /**
  * Generate a sentence based on the markov chain data provided.
  *
+ * @param {Map<string | symbol, (string | symbol)[]>} map Markov chain data
  * @param [options] Options to influence how data is generated.
  */
 export default function generate(map, options = {}) {
@@ -17,7 +18,7 @@ export default function generate(map, options = {}) {
     throw new TypeError("Invalid input to generation options");
   }
 
-  let startArray = options.start?.split(" ");
+  let startArray = options.start?.split(" ") ?? [];
 
   /**
    * @type {symbol | string | undefined}
@@ -31,12 +32,14 @@ export default function generate(map, options = {}) {
   function updateCurrentData() {
     /** @type {(string | symbol)[]} */
     // @ts-ignore
-    currentData = map.get(currentWord) ?? [];
+    currentData = map.get?.(currentWord) ?? [];
 
     // @ts-ignore
     if (shouldStopASAP && currentData.includes(SYMBOL_END)) currentData = null;
     else
-      currentWord = currentData[Math.floor(Math.random() * currentData.length)];
+      currentWord =
+        // @ts-ignore
+        currentData[Math.floor(Math.random() * currentData.length)];
 
     if (currentWord === SYMBOL_END) {
       currentWord = undefined;
