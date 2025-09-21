@@ -1,8 +1,7 @@
 {
   "name": "mrkv",
-  "packageManager": "yarn@3.2.1",
   "description": "Small, fast and lightweight markov chain generator.",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "main": "./index.js",
   "types": "./types.d.ts",
   "type": "module",

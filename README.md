@@ -4,144 +4,35 @@ A simple, fast and lightweight (zero dependencies) Markov chain library for use 
 
 Useful for creating silly texts from a pattern of sentences, e.g. exported from a chat platform!
 
-## Caveats
+### Optimisations in v2
 
-At datasets over 1 million sentences, large memory issues have been observed. The particular mechanism the library uses to predict words is based on lengthy arrays of words mapped to other words. There is not much optimisation for memory usage, however the library is [the fastest](#benchmarks) according to benchmarks. If you're not worried about memory usage, this library is fine.
+- Loading a new dataset is **~32x faster**
+- Generation is significantly more memory efficient especially across repetitive datasets
+- More predictable performance, scalability
+
+| Version        | Load (10k)        | Generation (10k) | Load (100k)     | Generation (100k) |
+| -------------- | ----------------- | ---------------- | --------------- | ----------------- |
+| Original impl. | 37.6 ops/sec      | 570k ops/sec     | 2.94 ops/sec    | 209k ops/sec      |
+| **Current**    | **1,208 ops/sec** | **331k ops/sec** | **111 ops/sec** | **162k ops/sec**  |
+
+> Slightly slower generation, but significantly more memory efficient and scalable.
 
 ## Usage
 
-- Loading an array
+```js
+const corpus = new Corpus();
 
-  ```js
-  const map = await loadArray(["i like hamburgers", "i like cats"]);
-  ```
+corpus.load(readFileSync("./bible.txt", "utf-8"));
 
-- Loading a file (newline-seperated sentences)
-
-  ```js
-  const map = await loadFile("data.txt");
-  ```
-
-- Generating a sentence
-
-  ```js
-  generateFromMap(map); // i like hamburgers or i like cats
-  ```
-
-- Completing a sentence
-
-  ```js
-  generateFromMap(map, {
-    start: "i like",
-  });
-
-  // -> i like hamburgers or i like cats
-  ```
+corpus.generate();
+```
 
 ## Installation
 
 From npm:
 
 ```sh
-npm install mrkv
-yarn add mrkv
-```
-
-## Documentation
-
-### `loadArray(sentences: string): Promise<Corpus>`
-
-Takes an array of sentences and returns a data map representing the consumed sentences' patterns. This data structure is designed to maximise speed over RAM usage, so in some cases (>500k sentences) it can be very resource intensive to generate and store the result of this function.
-
-```js
-const map = await loadArray([
-  "i like apples",
-  "apples are my favourite fruit",
-  "i like fruit but chocolate bars are better",
-]);
-
-console.log(generateFromMap(map));
-```
-
-[More information about `generateFromMap`](#generatefrommapcorpus-corpus-options-string)
-
-### `loadFile(name: string): Promise<Corpus>`
-
-**Node.js only**
-
-Reads a file, then uses [`loadArray`](#loadarraysentences-string-promisecorpus) to generate a data map and return the resulting value. The same caveat, although possibly worse, applies from `loadArray`, given that you have to first read a large file, store that result and _then_ generate a data structure for the chain.
-
-```py
-# data.txt
-i like apples
-apples are my favourite fruit
-i like fruit but chocolate bars are better
-```
-
-```js
-const map = await loadFile("data.txt");
-
-console.log(generateFromMap(map));
-```
-
-### `generateFromMap(corpus: Corpus, options?): string`
-
-Generate a string value from the data structure. This function has seen many underlying logic iterations and is now optimised for speed _and_ RAM usage. Make sure to call this every time you want a value from the map instead of generating a new map every time!
-
-```js
-const map = await loadArray([
-  "i like apples",
-  "apples are my favourite fruit",
-  "i like fruit but chocolate bars are objectively better",
-  "chocolate bars are delicious",
-]);
-
-console.log(generateFromMap(map));
-
-// the result could be different, e.g. "apples are objectively better" or
-// "chocolate bars are my favourite fruit", etc.
-
-// the options control the sentence's start and maximum length
-generateFromMap(map, {
-  start: "i like",
-  limit: 50,
-});
-```
-
-### `generateFromArray(array: Array<string>, options?): Promise<string>`
-
-Generates a string value from the array of sentences, calling [`loadArray`](#loadarraysentences-string-promisecorpus) and then [`generateFromMap`](#generatefrommapcorpus-corpus-options-string). If you need to generate a string more than once from a specific sentence array, **do not use this method**. Instead, follow the example explained in both of the linked functions.
-
-```js
-console.log(
-  await generateFromArray([
-    "i like apples",
-    "apples are my favourite fruit",
-    "i like fruit but chocolate bars are objectively better",
-    "chocolate bars are delicious",
-  ])
-);
-```
-
-### `generateFile(name: string, options?): Promise<string>`
-
-**Node.js only**
-
-This method should only be used in exceptional circumstances or in scripting. This is a once-off function, if you need to reuse the file **do not do it this way**. Refer to [`generateFromMap`](#generatefrommapcorpus-corpus-options-string).
-
-Calls [`loadFile`](#loadfilename-string-promisecorpus) and then `generateFromMap` to simplify one-time operations.
-
-```py
-# data.txt
-i like apples
-apples are delicious
-i like fruit but chocolate bars are better
-chocolate bars are unhealthy.
-```
-
-```js
-console.log(await generateFile("data.txt"));
-// e.g. chocolate bars are delicious
+pnpm install mrkv
 ```
 
 ## Features
@@ -157,10 +48,12 @@ console.log(await generateFile("data.txt"));
 
 Benchmarks ran on Apple M2 chip, 16GB RAM.
 
-| Benchmark                            | mrkv      | kurwov   | markov-typescript | markov-generator | markov-strings                     | markov-chains |
-| ------------------------------------ | --------- | -------- | ----------------- | ---------------- | ---------------------------------- | ------------- |
-| Generating a set from 10k sentences  | 30.051ms  | 50.53ms  | 419.66ms          | 346.16ms         | 1834.32ms                          | Errored       |
-| Generating a set with 100k sentences | 403.806ms | 572.49ms | 6221.28ms         | 28329.17ms       | Couldn't finish in over 10 minutes | Errored       |
+```
+mrkv 10k load x 1,208 ops/sec ±5.09% (85 runs sampled)
+mrkv 10k gen x 330,612 ops/sec ±0.58% (93 runs sampled)
+mrkv 100k load x 111 ops/sec ±1.75% (60 runs sampled)
+mrkv 100k gen x 162,437 ops/sec ±3.18% (91 runs sampled)
+```
 
 ## Buy me a coffee
 

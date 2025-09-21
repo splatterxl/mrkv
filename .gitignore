@@ -116,3 +116,7 @@ web.js
 index.js
 
 test
+
+.DS_Store
+
+.idea/
