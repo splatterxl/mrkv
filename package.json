@@ -24,7 +24,7 @@
     "microtime": "^3.1.1",
     "rollup": "^3.10.0",
     "rollup-plugin-deno": "^1.0.1",
-    "rollup-plugin-swc3": "^0.8.0",
+    "rollup-plugin-swc3": "^0.8.0"
   },
   "scripts": {
     "bundle:web": "rollup --config rollup.web.mjs",
