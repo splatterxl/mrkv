@@ -12,8 +12,8 @@ Useful for creating silly texts from a pattern of sentences, e.g. exported from 
 
 | Version        | Load (10k)        | Generation (10k) | Load (100k)     | Generation (100k) |
 | -------------- | ----------------- | ---------------- | --------------- | ----------------- |
-| Original impl. | 37.6 ops/sec      | 570k ops/sec     | 2.94 ops/sec    | 209k ops/sec      |
-| **Current**    | **1,208 ops/sec** | **331k ops/sec** | **111 ops/sec** | **162k ops/sec**  |
+| Original impl. | 37.6 ops/sec      | **570k ops/sec** | 2.94 ops/sec    | **209k ops/sec**  |
+| **Current**    | **1,208 ops/sec** | 331k ops/sec     | **111 ops/sec** | 162k ops/sec      |
 
 > Slightly slower generation, but significantly more memory efficient and scalable.
 
